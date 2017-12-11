@@ -19,8 +19,10 @@ simulate.gam <- function(object,nsim){
     }
   }
   else if(length(grep("Negative Binomial",fam))!=0){
-    if (any(grepl("putTheta",names(b2$family)))){
-
+    if (any(grepl("putTheta",names(object$family)))){
+      distr <- function(linpred_inv){
+        rnbinom(length(linpred_inv), size = object$family$getTheta(trans = T), mu = linpred_inv)
+      }
 
     }else{
       distr <- function(linpred_inv){
