@@ -16,6 +16,7 @@
 #' 
 #' @example inst/examples/simulate.gamHelp.R
 
+lme4::.simulateFun
 
 sim_xxx <- function(nsim = 1, pred, linkinv, distr, rand.eff = NULL, corStruct = NULL){
   # TODO: option to keep draws from rand.eff and/or cor.str constant for all nsim
