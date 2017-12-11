@@ -12,18 +12,18 @@ simulate.gam <- function(object,nsim){
   linkinv <- object$family$linkinv
   
   fam <- object$family$family
-  if(grep("Beta",fam)){
+  if(length(grep("Beta",fam))!=0){
     distr <- function(linpred_inv){
       phi <- object$family$getTheta(trans =T)
       rbeta(length(linpred_inv), shape1 = phi*linpred_inv, shape2 = phi-linpred_inv*phi) #Here linpred_inv is the mu of the beta distribution
     }
   }
-  else if(grep("Negative binomial",fam)){
+  else if(length(grep("Negative Binomial",fam))!=0){
     distr <- function(linpred_inv){
       rnbinom(length(linpred_inv), size = object$family$getTheta(), mu = linpred_inv)
     }
   }
-  else if(grep("ziP",fam)){
+  else if(length(grep("ziP",fam))!=0){
     distr <- function(linpred_inv){
       theta <- object$family$getTheta(trans=FALSE)
       sim <- function(linpred_inv,theta){
@@ -45,8 +45,13 @@ simulate.gam <- function(object,nsim){
     }
     
   }
+  else{
+    stop()
+    print("Not implemented")
+  }
   sim <- sim_xxx(nsim,prediction,linkinv,distr)
   #create new class for simulation
   #class(sim) <- 
   return(sim)
 }
+  
