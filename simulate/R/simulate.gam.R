@@ -20,7 +20,7 @@ simulate.gam <- function(object,nsim){
   }
   else if(length(grep("Negative Binomial",fam))!=0){
     distr <- function(linpred_inv){
-      rnbinom(length(linpred_inv), size = object$family$getTheta(), mu = linpred_inv)
+      rnbinom(length(linpred_inv), size = object$family$getTheta(trans = T), mu = linpred_inv)
     }
   }
   else if(length(grep("ziP",fam))!=0){
