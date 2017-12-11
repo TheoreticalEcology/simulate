@@ -1,5 +1,7 @@
 # create data: steal example from mgcv::negbin
 library(mgcv)
+library(simulate)
+
 set.seed(3)
 n <- 400 # sample size
 nsim <- 100 # number of simulations from the model
