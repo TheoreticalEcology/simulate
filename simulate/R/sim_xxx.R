@@ -1,7 +1,7 @@
 #' sim_xxx
-#' @author Lionel Hertzog
+#' @author Loic Chalmandrier, Florian Hartig, Severin Hauenstein, Lionel Hertzog, Mira Kattwinkel
 #' 
-#' @description Internal function to compute new prediction
+#' @description Internal function to compute new predictions
 #' 
 #' @details Simulate new response data (so far for gam::mgcv)
 #' 
@@ -11,13 +11,13 @@
 #' @param distr error distribution for the specific family
 #' @param rand.eff vector of random effects; defaults to NA = no random 
 #' effects
-#' @param cor.str matrix for the temporal or spatial correlation structure;
-#' defaults to NA = no correlation
+#' @param corStruct matrix for the temporal or spatial correlation structure;
+#' defaults to NA = no correlation. See \code{\link{nlme::corClasses}}.
 #' 
 #' @example inst/examples/simulate.gamHelp.R
 
 
-sim_xxx <- function(nsim = 1, pred, linkinv, distr, rand.eff = NA, cor.str = NA ){
+sim_xxx <- function(nsim = 1, pred, linkinv, distr, rand.eff = NULL, corStruct = NULL){
   # TODO: option to keep draws from rand.eff and/or cor.str constant for all nsim
   
   npred <- length(pred)
@@ -25,12 +25,12 @@ sim_xxx <- function(nsim = 1, pred, linkinv, distr, rand.eff = NA, cor.str = NA 
   
   for(i in 1:nsim){
     sim_RE <- rep(0, npred)
-    if(!is.na(rand.eff))
+    if(!is.null(rand.eff))
     # draw random effects
       sim_RE <- draw_RE()
     
     sim_CorStruct <- rep(0, npred)
-    if(!is.na(cor.str))
+    if(!is.null(corStruct))
     # draw from correlation structure
       sim_CorStruct <- draw_CorStruct()
     
