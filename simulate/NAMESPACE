@@ -2,5 +2,4 @@
 
 S3method(simulate,betareg)
 S3method(simulate,gam)
-S3method(simulate,gam.betar)
 S3method(simulate,lme)

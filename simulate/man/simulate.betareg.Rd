@@ -12,6 +12,19 @@ Get new response values for beta regression
 \details{
 The function simulate new response data
 }
+\examples{
+library(simulate)
+library(betareg)
+
+#fit a model from ?betareg examples
+data("GasolineYield", package = "betareg")
+gy <- betareg(yield ~ batch + temp, data = GasolineYield)
+summary(gy)
+
+#get 100 new simulations
+sims <- simulate(gy,nsim=100)
+
+}
 \author{
 Lionel Hertzog
 }
